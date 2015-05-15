@@ -1,0 +1,30 @@
+# system to simulate
+system = "sdna"
+
+@ODE_PARAMETERS@
+
+@ENVIRONMENT_PARAMETERS@
+
+@DNA_PARAMETERS@
+
+@MECHANICAL_MODEL@
+
+@THERMOSTAT_PARAMETERS@
+
+@FORCES_PARAMETERS@
+
+@EXTERNAL_FORCES_PARAMETERS@
+
+@BEAD_PARAMETERS@
+
+@SURFACE_PARAMETERS@
+
+# initial config has loop? (1 = yes; else = no)
+initial_config_has_loop = 0;
+# loop_nsegments = 30;
+# loop_nturns = 3.;
+# loop_pitch = 1.5;
+#
+@FILE_NAMES@
+
+@TIME_PARAMETERS@

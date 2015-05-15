@@ -1,0 +1,64 @@
+# ignore Makefiles
+*Makefile.in
+*Makefile
+
+# ignore object files and .deps and .libs directories
+*.o
+*.Po
+*.lo
+*.la
+*.deps
+*.libs
+*.dirstamp
+
+# ignore extra dist directories and files
+autom4te.cache/
+config.h
+config.log
+config.status
+config.guess
+libtool
+stamp-h1
+aclocal.m4
+Makefile.in
+configure
+m4
+m4/*
+depcomp
+config.h.in
+config.sub
+install-sh
+ltmain.sh
+missing
+compile
+
+# ignore temp files for editors
+*.swp
+*~
+
+# ignore python compiled modules
+*.pyc
+
+# ignore dists directory
+dists/
+
+# ignore example config files
+examples/*.conf
+examples/.examples_in/*.conf
+
+# ignore data files generated in examples directory
+examples/*.dat
+
+# ignore compiled executables
+dna_ode/dna_ode
+tests/morse_potential/
+tools/distance_map_analysis/distance_map_analysis
+tools/get_parameter/get_parameter
+tools/rotation_to_quaternion/rotation_to_quaternion
+tools/trajectory_analyze/trajectory_analyze
+tools/wlc/wlc_F
+tools/wlc/wlc_fit
+tools/wlc/wlc_rho
+
+# ignore tests directory
+tests/
