@@ -39,9 +39,6 @@ compile
 # ignore python compiled modules
 *.pyc
 
-# ignore dists directory
-dists/
-
 # ignore example config files
 examples/*.conf
 examples/.examples_in/*.conf
