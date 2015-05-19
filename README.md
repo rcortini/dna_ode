@@ -6,7 +6,7 @@ This program allows to simulate a DNA molecule under optical or magnetic tweezer
 
 ## Dependencies
 
-* ODE: Open Dynamics Engine, version >= 0.13. Currently maintained at [https://bitbucket.org/odedevs/ode/](https://bitbucket.org/odedevs/ode/). The documentation is available at the [ODE homepage](http://ode-wiki.org/wiki/index.php?title=Main_Page).
+* ODE: Open Dynamics Engine, version >= 0.13. Currently maintained at [https://bitbucket.org/odedevs/ode/](https://bitbucket.org/odedevs/ode/). The documentation is available at the [ODE homepage](http://ode-wiki.org/wiki/index.php?title=Main_Page). To get everything right, you should compile ODE after runnning "./configure" with these flags: `--enable-double-precision --enable-shared --enable-libccd`
 * GSL: Gnu Scientific Library, version >= 0.16, available at [http://www.gnu.org/software/gsl/](http://www.gnu.org/software/gsl/).
 * libconfig: Simple C library for reading configuration files, version >= 1.4.9. Available at [www.hyperrealm.com/libconfig/](www.hyperrealm.com/libconfig/).
 
