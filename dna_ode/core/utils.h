@@ -42,6 +42,8 @@ system_id which_system (char *system);
 
 unsigned int system_nbodies (char *system, unsigned int dna_nsegments);
 
+unsigned int system_njoints (char *system, unsigned int dna_nsegments);
+
 int metropolis (t_real beta, t_real E_initial, t_real E_final);
 
 #endif

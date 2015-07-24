@@ -132,7 +132,18 @@ unsigned int system_nbodies (char *system, unsigned int dna_nsegments) {
   };
 }
 
-
+unsigned int system_njoints (char *system, unsigned int dna_nsegments) {
+  system_id sysid = which_system (system);
+  switch (sysid) {
+    case (SDNA) :
+      return dna_nsegments + 1;
+      break;
+    default :
+      err_message ("Invalid system type: %s\n", system);
+      exit (EXIT_FAILURE);
+      break;
+  }
+}
 
 /* Metropolis Monte Carlo method */
 int metropolis (t_real beta, t_real E_initial, t_real E_final) {

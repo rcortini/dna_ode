@@ -22,6 +22,7 @@
 
 #include "config_read.h"
 #include "dna_ode_core.h"
+#include "mechanical_models.h"
 
 
 /* this structure contains all the simulation parameters */
@@ -120,6 +121,8 @@ struct simparameters {
   /* mechanical model */
   char * mechanical_model;
   t_real k4;
+  char * inhom_file;
+  inhom_par *inhom_p;
 
   /* ODE "successive over-relaxation params */
   int sor_numiter;

@@ -87,5 +87,13 @@ void body_twist_and_torque_harmonic4 (t_real *torque, const t_real *, const t_re
 
 void body_twist_and_torque_nicked_harmonic4 (t_real *torque, const t_real *, const t_real *, t_real *Tw, void *);
 
+typedef struct {
+  unsigned int njoints;
+  t_real *gb;
+  t_real *gt;
+  unsigned int count;
+} inhom_par;
+
+void body_twist_and_torque_harmonic_inhom (t_real *torque, const t_real *R1, const t_real *R2, t_real *Tw, void *p);
 
 #endif

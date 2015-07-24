@@ -167,6 +167,9 @@ void init_simulation_parameters (simparameters *simparams, config_t *simconfig) 
   if (strcmp (simparams->mechanical_model, "harmonic4")==0 ||
       strcmp (simparams->mechanical_model, "nicked_harmonic4")==0)
     simparams->k4 = mycfg_read_double (simconfig, "k4");
+  else if (strcmp (simparams->mechanical_model, "harmonic_inhom")==0) {
+    simparams->inhom_file = mycfg_read_string (simconfig, "inhom_file");
+  }
 
   /*
    * FILE NAMES

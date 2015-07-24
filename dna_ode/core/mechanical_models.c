@@ -152,3 +152,43 @@ void body_twist_and_torque_nicked_harmonic4 (t_real *torque, const t_real *R1, c
   /* assign zero twist */
   *Tw = 0.;
 }
+
+
+
+/* calculates the torque and twist between two DNA segments, given their tangent vectors. Returns
+ * the vector with the torque, and also assigns the Tw value with the current value of the twist.
+ * INHOMOGENEOUS LINEAR MODEL. (Derived from a bending energy which is ~gb theta^2. */
+void body_twist_and_torque_harmonic_inhom (t_real *torque, const t_real *R1, const t_real *R2, t_real *Tw, void *p) {
+  t_vector bn, t1_plus_t2;
+  t_real one_plus_t1_dot_t2, theta;
+  inhom_par *par = (inhom_par *) p;
+
+  /* calculate 1 + t1.t2 */
+  one_plus_t1_dot_t2 = 1. + T1_T2 (R1, R2);
+
+  /* calculate the binormal to t2 and t1 */
+  T1_x_T2 (bn, R1, R2);
+  vector_unit (bn);
+
+  /* angle between the tangent vectors */
+  theta = theta_angle (R1, R2);
+
+  /* calculate twist */
+  twist_12 (R1, R2, one_plus_t1_dot_t2, Tw);
+
+  t1_plus_t2_vec (t1_plus_t2, R1, R2);
+
+  /* get the segment identity */
+  unsigned int count = par->count;
+  unsigned int njoints = par->njoints;
+  t_real gb = par->gb [count];
+  t_real gt = par->gt [count];
+
+  /* calculate torque */
+  vector_lincomb (torque, bn, t1_plus_t2, gb * theta, gt * (*Tw) / one_plus_t1_dot_t2);
+
+  /* increment counter */
+  par->count++;
+  if (par->count==njoints)
+    par->count = 0;
+}

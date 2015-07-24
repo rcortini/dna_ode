@@ -20,6 +20,7 @@
 #include "dna_ode_core.h"
 #include "dna.h"
 #include "dna_ode.h"
+#include "mechanical_models.h"
 
 
 
@@ -201,6 +202,43 @@ void init_simulation_context (simcontext *simcon, simparameters *simparams) {
     /* assign mechanical model */
     simcon->mechanical_model.f = body_twist_and_torque_nicked_harmonic4;
     simcon->mechanical_model.p = &simparams->gb;
+  }
+  else if (strcmp (simparams->mechanical_model, "harmonic_inhom")==0) {
+    FILE *inhom_file = my_fopen (simparams->inhom_file, "r");
+    const unsigned int njoints = system_njoints (PAR (system), PAR (dna_nsegments));
+    unsigned int i = 0;
+
+    /* init the parameter structure */
+    simparams->inhom_p = (inhom_par *) malloc (sizeof (inhom_par));
+    simparams->inhom_p->count = 0;
+    simparams->inhom_p->njoints = njoints;
+    simparams->inhom_p->gb = (t_real *) malloc (njoints * sizeof (t_real));
+    simparams->inhom_p->gt = (t_real *) malloc (njoints * sizeof (t_real));
+
+    /* read parameter file */
+    while (!feof (inhom_file)) {
+      if (i==njoints) {
+	err_message ("Error while reading inhomogeneous parameter file %s\n", PAR (inhom_file));
+	exit (EXIT_FAILURE);
+      }
+      int nread = fscanf (inhom_file, "%lf %lf\n", 
+	  &simparams->inhom_p->gb [i],
+	  &simparams->inhom_p->gt [i]);
+      if (nread < 2) {
+	err_message ("Error while reading inhomogeneous parameter file %s\n", PAR (inhom_file));
+	exit (EXIT_FAILURE);
+      }
+      i++;
+    }
+    if (i!=njoints) {
+      err_message ("Insufficient data in inhomogeneous parameter file %s\n", PAR (inhom_file));
+      exit (EXIT_FAILURE);
+    }
+    fclose (inhom_file);
+
+    /* assign mechanical model */
+    simcon->mechanical_model.f = body_twist_and_torque_harmonic_inhom;
+    simcon->mechanical_model.p = simparams->inhom_p;
   }
   else {
     err_message ("Invalid mechanical model \"%s\"", simparams->mechanical_model);

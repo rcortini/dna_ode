@@ -65,6 +65,9 @@ void free_memory (simcontext * simcon) {
       simcon->mechanical_model.f == body_twist_and_torque_kinkable) {
     free (simcon->mechanical_model.p);
   }
+  else if (simcon->mechanical_model.f == body_twist_and_torque_harmonic_inhom) {
+    free (simcon->simparams->inhom_p);
+  }
 
   /* destroy body_list */
   for (i=0; i<simcon->nbodies; i++) free (simcon->body_list [i].name);
