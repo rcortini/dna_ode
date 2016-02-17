@@ -169,8 +169,6 @@ int chi_df (const gsl_vector *X, void *par, gsl_matrix * J);
 
 int chi_fdf (const gsl_vector * x, void *p, gsl_vector * f, gsl_matrix * J);
 
-int fdf_fit (const gsl_vector *x_start, struct fdf_fit_parameters *fit_p, gsl_vector *fit, gsl_matrix *covar);
-
 double chi2_from_fit (gsl_vector *fit, struct fdf_fit_parameters *fit_pars);
 
 /* DISTANCE MAP FUNCTIONS */

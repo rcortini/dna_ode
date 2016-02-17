@@ -731,56 +731,6 @@ int chi_fdf (const gsl_vector * x, void *p, gsl_vector * f, gsl_matrix * J) {
 
 
 
-/* performs a non-linear best-fit of parameters from a set of weighted data and a model, and
- * its derivatives, based on the algorithm passed through the fit_p pointer, using a least-square minimization
- * method */
-int fdf_fit (const gsl_vector *x_start, struct fdf_fit_parameters *fit_p, gsl_vector *fit, gsl_matrix *covar) {
-  unsigned int iter = 0, p = fit_p->p, n = fit_p->n;
-  const gsl_multifit_fdfsolver_type *T = fit_p->type;
-  gsl_multifit_fdfsolver *s;
-  int status;
-  gsl_multifit_function_fdf f;
-
-  /* init function to fit */
-  f.f = &chi_f;
-  f.df = &chi_df;
-  f.fdf = &chi_fdf;
-  f.n = n;
-  f.p = fit_p->p;
-  f.params = fit_p;
-
-  /* initialize the fitter */
-  s = gsl_multifit_fdfsolver_alloc (T, n, p);
-  gsl_multifit_fdfsolver_set (s, &f, x_start);
-
-  /* iterate */
-  do
-  {
-    iter++;
-    status = gsl_multifit_fdfsolver_iterate (s);
-
-    /* printf ("status = %s\n", gsl_strerror (status)); */
-
-    if (status)
-      break;
-
-    status = gsl_multifit_test_delta (s->dx, s->x, fit_p->eps_abs, fit_p->eps_rel);
-  }
-  while (status == GSL_CONTINUE && iter < fit_p->max_iter);
-
-  /* assign the fit vector and the covariance matrix */
-  gsl_multifit_covar (s->J, 0.0, covar);
-  gsl_vector_memcpy (fit, s->x);
-
-  /* printf ("status = %s\n", gsl_strerror (status)); */
-
-  gsl_multifit_fdfsolver_free (s);
-
-  return status;
-}
-
-
-
 /* calculates the value of the chi^2, as a function of the best-fit vector of 
  * parameters, and the parameters of the function fitter */
 double chi2_from_fit (gsl_vector *fit, struct fdf_fit_parameters *fit_pars) {
