@@ -108,6 +108,8 @@ void print_gsl_vector (unsigned int nrows, gsl_vector *m) {
 
 /* returns the system identity based on the string "system" */
 system_id which_system (char *system) {
+  if (strcmp (system, "fdna")==0)
+    return FDNA;
   if (strcmp (system, "sdna")==0)
     return SDNA;
   else {
@@ -122,6 +124,9 @@ system_id which_system (char *system) {
 unsigned int system_nbodies (char *system, unsigned int dna_nsegments) {
   system_id sysid = which_system (system);
   switch (sysid) {
+    case (FDNA) :
+      return dna_nsegments;
+      break;
     case (SDNA) :
       return dna_nsegments + 1;
       break;
@@ -135,6 +140,9 @@ unsigned int system_nbodies (char *system, unsigned int dna_nsegments) {
 unsigned int system_njoints (char *system, unsigned int dna_nsegments) {
   system_id sysid = which_system (system);
   switch (sysid) {
+    case (FDNA) :
+      return dna_nsegments-1;
+      break;
     case (SDNA) :
       return dna_nsegments + 1;
       break;
