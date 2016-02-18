@@ -1,4 +1,4 @@
-SUBDIRS = core sdna
+SUBDIRS = core sdna fdna
 
 DNA_ODE=$(top_builddir)/dna_ode
 

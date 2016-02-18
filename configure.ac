@@ -85,6 +85,7 @@ AC_ARG_ENABLE([more-debug],
 AC_CONFIG_FILES([Makefile
                  dna_ode/Makefile
                  dna_ode/core/Makefile
+                 dna_ode/fdna/Makefile
                  dna_ode/sdna/Makefile
                  examples/.examples_in/Makefile
                  examples/Makefile])
