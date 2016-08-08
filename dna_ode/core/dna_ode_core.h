@@ -210,7 +210,8 @@ typedef struct surface_ode surface_ode;
 
 typedef enum {
   FDNA,
-  SDNA}
+  SDNA,
+  CDNA}
 system_id;
 
 

@@ -1,4 +1,4 @@
-conf_files = fdna.conf sdna.conf
+conf_files = fdna.conf sdna.conf cdna.conf
 
 conf_file_sources = dna_parameters.conf \
 		    environment_parameters.conf \
@@ -12,7 +12,8 @@ conf_file_sources = dna_parameters.conf \
 		    time_parameters.conf \
 		    file_names.conf \
 		    fdna.conf.in \
-		    sdna.conf.in
+		    sdna.conf.in \
+		    cdna.conf.in
 
 SUFFIXES = .conf.in .conf
 

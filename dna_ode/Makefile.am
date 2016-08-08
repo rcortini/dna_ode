@@ -1,4 +1,4 @@
-SUBDIRS = core sdna fdna
+SUBDIRS = core sdna fdna cdna
 
 DNA_ODE=$(top_builddir)/dna_ode
 
@@ -25,7 +25,9 @@ dna_ode_SOURCES = dna_ode.c dna_ode.h\
 
 dna_ode_CPPFLAGS = $(GSL_CFLAGS) $(ODE_CFLAGS) -I$(top_srcdir)/dna_ode/src -I$(top_srcdir)/dna_ode/core
 dna_ode_LDADD = $(top_builddir)/dna_ode/core/libdna_ode_core.la -L$(top_builddir)/dna_ode/core\
-		$(DNA_ODE)/sdna/libsdna.la
+		$(DNA_ODE)/sdna/libsdna.la\
+	       	$(DNA_ODE)/fdna/libfdna.la\
+	       	$(DNA_ODE)/cdna/libcdna.la
 
 AM_LDFLAGS = $(GSL_LIBS) $(ODE_LIBS) $(CONFIG_LIBS)
-AM_CFLAGS = -I$(top_srcdir)/dna_ode/src -Isdna
+AM_CFLAGS = -I$(top_srcdir)/dna_ode/src -Isdna -Ifdna -Icdna

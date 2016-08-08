@@ -16,20 +16,26 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#ifndef __DNA_ODE_RUN_H__
-#define __DNA_ODE_RUN_H__
-
 #include "dna_ode_core.h"
-#include "simparameters.h"
-#include "simcontext.h"
-#include "output_functions.h"
-#include "print_functions.h"
-#include "collision_callback.h"
-#include "fin_functions.h"
+#include "cdna.h"
 
-void print_usage_run (const char *program_name);
-int sdna_main (simcontext *simcon);
-int fdna_main (simcontext *simcon);
-int cdna_main (simcontext *simcon);
 
-#endif
+
+/*
+ * UTILITY FUNCTIONS FOR PRINTING OUTPUT 
+ */
+
+
+
+/* once every print_interval number of steps, this function is called and output is shown on screen */
+void cdna_print_data (simcontext * simcon, cdna_simcontext *cdna_simcon) {
+  message ("step %lu     Wr: %.3f  dTw: %.3f  Lk: %.3f        Et: %.2f  Ut: %.2f  ext_Ut: %.2f  Kt: %.2f\n",
+      simcon->sim_tick,
+      cdna_simcon->Wr,
+      cdna_simcon->dTw,
+      cdna_simcon->Lk,
+      cdna_simcon->Et,
+      cdna_simcon->Ut,
+      cdna_simcon->ext_Ut,
+      cdna_simcon->Kt);
+}

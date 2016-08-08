@@ -16,20 +16,24 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#ifndef __DNA_ODE_RUN_H__
-#define __DNA_ODE_RUN_H__
-
 #include "dna_ode_core.h"
-#include "simparameters.h"
-#include "simcontext.h"
-#include "output_functions.h"
-#include "print_functions.h"
-#include "collision_callback.h"
-#include "fin_functions.h"
+#include "cdna.h"
 
-void print_usage_run (const char *program_name);
-int sdna_main (simcontext *simcon);
-int fdna_main (simcontext *simcon);
-int cdna_main (simcontext *simcon);
 
-#endif
+
+/* 
+ * FINALIZATION FUNCTIONS
+ */
+
+
+
+void cdna_free_memory (cdna_simcontext * cdna_simcon) {
+  unsigned int i;
+  for (i=0; i<cdna_simcon->dna->nsegments; i++) free (cdna_simcon->dna->seg [i]);
+  for (i=0; i<cdna_simcon->dna->njoints; i++) free (cdna_simcon->dna->joint [i]);
+  free (cdna_simcon->dna->seg);
+  free (cdna_simcon->dna->joint);
+  free (cdna_simcon->dna);
+  ccdna_joint_solution_workspace_free (cdna_simcon->ws);
+  free (cdna_simcon);
+}

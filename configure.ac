@@ -87,6 +87,7 @@ AC_CONFIG_FILES([Makefile
                  dna_ode/core/Makefile
                  dna_ode/fdna/Makefile
                  dna_ode/sdna/Makefile
+                 dna_ode/cdna/Makefile
                  examples/.examples_in/Makefile
                  examples/Makefile])
 

@@ -112,6 +112,8 @@ system_id which_system (char *system) {
     return FDNA;
   if (strcmp (system, "sdna")==0)
     return SDNA;
+  if (strcmp (system, "cdna")==0)
+    return CDNA;
   else {
     err_message ("Invalid system type: %s\n", system);
     exit (EXIT_FAILURE);
@@ -130,6 +132,9 @@ unsigned int system_nbodies (char *system, unsigned int dna_nsegments) {
     case (SDNA) :
       return dna_nsegments + 1;
       break;
+    case (CDNA) :
+      return dna_nsegments;
+      break;
     default :
       err_message ("Invalid system type: %s\n", system);
       exit (EXIT_FAILURE);
@@ -145,6 +150,9 @@ unsigned int system_njoints (char *system, unsigned int dna_nsegments) {
       break;
     case (SDNA) :
       return dna_nsegments + 1;
+      break;
+    case (CDNA) :
+      return dna_nsegments;
       break;
     default :
       err_message ("Invalid system type: %s\n", system);

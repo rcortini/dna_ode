@@ -62,9 +62,15 @@ int dna_ode_run (int argc, char **argv, config_t *simconfig) {
     case SDNA :
       retcode = sdna_main (simcon);
       break;
+    case FDNA :
+      retcode = fdna_main (simcon);
+      break;
+    case CDNA :
+      retcode = cdna_main (simcon);
+      break;
     default :
       err_message ("Invalid system ID\n");
-      retcode = 1;
+      return 1;
   }
 
   /* final stuff to terminal */
