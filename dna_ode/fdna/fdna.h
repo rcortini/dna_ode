@@ -1,6 +1,6 @@
 /* dna_ode: simulating DNA using the ODE physics engine
  *
- * Copyright (C) 2014, 2015  Ruggero Cortini
+ * Copyright (C) 2014, 2015, 2016  Ruggero Cortini
 
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
